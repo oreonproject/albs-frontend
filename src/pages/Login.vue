@@ -3,32 +3,21 @@
     <div class="row">
       <div class="col-md-12">
         <h5 class="text-center">
-          Please select the service you want to use to log into ALBS
+          Please log in with your GitHub profile to access ALBS
         </h5>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6" style="display: grid">
+      <div class="col-md-12" style="display: grid">
         <q-btn
           flat
-          text="Login with AlmaLinux Accounts"
-          @click="almalinuxLogin"
+          text="Login with your GitHub profile"
+          @click="githubLogin"
         >
           <q-icon class="text-dark" size="250px">
             <img
-              src="~assets/almalinux-logo.png"
-              alt="Login using your AlmaLinux account"
-            />
-          </q-icon>
-        </q-btn>
-      </div>
-
-      <div class="col-md-6" style="display: grid">
-        <q-btn flat text="Login with your Github profile" @click="githubLogin">
-          <q-icon class="text-dark" size="250px">
-            <img
               src="~assets/github-mark.svg"
-              alt="Login using your Github profile"
+              alt="Login using your GitHub profile"
             />
           </q-icon>
         </q-btn>
@@ -38,31 +27,26 @@
 </template>
 
 <script>
-  import {defineComponent} from 'vue'
-  import {fabGithub} from '@quasar/extras/fontawesome-v5'
+import { defineComponent } from 'vue'
+import { fabGithub } from '@quasar/extras/fontawesome-v5'
 
-  export default defineComponent({
-    name: 'LoginPage',
+export default defineComponent({
+  name: 'LoginPage',
 
-    setup(props) {
-      return {
-        fabGithub,
-      }
+  setup() {
+    return {
+      fabGithub,
+    }
+  },
+
+  methods: {
+    githubLogin() {
+      this.$api.get('/auth/github/authorize').then((response) => {
+        window.location.href = response.data.authorization_url
+      })
     },
-
-    methods: {
-      githubLogin() {
-        this.$api.get('/auth/github/authorize').then((response) => {
-          window.location.href = response.data.authorization_url
-        })
-      },
-      almalinuxLogin() {
-        this.$api.get('/auth/almalinux/authorize').then((response) => {
-          window.location.href = response.data.authorization_url
-        })
-      },
-    },
-  })
+  },
+})
 </script>
 
 <style>
