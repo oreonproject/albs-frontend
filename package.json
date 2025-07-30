@@ -2,8 +2,8 @@
   "name": "albs-frontend",
   "version": "0.0.1",
   "description": "AlmaLinux build system",
-  "productName": "AlmaLinux Build System",
-  "author": "Vyacheslav Potoropin <vpotoropin@almalinux.org>",
+  "productName": "Oreon Build System",
+  "author": "Brandon Lester <blester@oreonproject.org>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
